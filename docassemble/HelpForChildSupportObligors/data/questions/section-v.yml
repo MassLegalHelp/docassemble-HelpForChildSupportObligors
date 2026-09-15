@@ -87,7 +87,9 @@ question: |
   Do you have any credit cards?
 subquestion: |
   Please answer yes if you have any credit cards such as a Visa, Mastercard, or Discover card. 
-yesno: has_credit_cards
+fields:
+  - no label: has_credit_cards
+    datatype: yesnoradio
 ---
 id: credit card info
 question: |
@@ -115,7 +117,9 @@ subquestion: |
   % for c in credit_cards.values():
   ${ c.issuer } | ${ c.account_no } | ${ c.monthly_payment } | ${ c.credit_limit } | ${ c.total_amt_owed}
   % endfor
-yesno: credit_cards.there_is_another
+fields:
+  - no label: credit_cards.there_is_another
+    datatype: yesnoradio
 ---
 code: |
   nav.set_section('Liabilities')

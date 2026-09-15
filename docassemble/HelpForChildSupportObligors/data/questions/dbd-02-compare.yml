@@ -189,7 +189,9 @@ subquestion: |
   * court orders,
   * receipts, and 
   * W2s.
-yesno: documentation
+fields:
+  - no label: documentation
+    datatype: yesnoradio
 ---
 id: dbd 02 - more info needed
 event: more_info_needed
@@ -238,7 +240,7 @@ fields:
     show if: cs_arrears_date_unknown
     code: |
       [{index+1:calendar.month_name[index+1]} for index in range(12)]
-  - no label: cs_arrears_date
+  - "When was the first time you fell behind on child support payments?": cs_arrears_date
     datatype: date
     max: ${ today() }
     hide if: cs_arrears_date_unknown
@@ -253,7 +255,9 @@ code: |
 id: dbd 02 - catch up
 question: |
   Were you ever able to catch up?
-yesno: cs_arrears_catch_up
+fields:
+  - no label: cs_arrears_catch_up
+    datatype: yesnoradio
 ---
 id: dbd 02 - previous order
 question: |

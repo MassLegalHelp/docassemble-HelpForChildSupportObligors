@@ -49,7 +49,9 @@ code: |
 id: have vehicles
 question: |
   Do you own or lease any vehicles?
-yesno: hasvehicles
+fields:
+  - no label: hasvehicles
+    datatype: yesnoradio
 ---
 comment: |
   NOTE(brycew): new_item_name needs to be set on each new addition,
@@ -149,13 +151,15 @@ subquestion: |
   ${ vehicles.item(veh).description } | ${ vehicles.item(veh).make } | ${ vehicles.item(veh).model } | ${ vehicles.item(veh).year } | ${ vehicles.item(veh).own_lease } | ${ vehicles.item(veh).license_plate } | ${ vehicles.item(veh).current_value } | ${ vehicles.item(veh).amt_owed }
   % endfor  
   
-yesno: vehicles.there_is_another
+fields:
+  - no label: vehicles.there_is_another
+    datatype: yesnoradio
 ---
 id: has safedeposit
 question: |
   Do you rent a safe deposit box?
 fields: 
-  - no label: has_safe_deposit_box
+  - "Do you rent a safe deposit box?": has_safe_deposit_box
     datatype: radio
     choices: 
       - Yes
@@ -192,7 +196,9 @@ fields:
 id: real property
 question: |
   Do you own or have any interest in any real property?
-yesno: hasprop
+fields:
+  - no label: hasprop
+    datatype: yesnoradio
 ---
 id: real property info
 question: |
@@ -227,7 +233,9 @@ subquestion: |
   % for pro in realprop:
   ${ realprop.item(pro).description } | ${ realprop.item(pro).address } | ${ realprop.item(pro).city } | ${ realprop.item(pro).state } | ${ realprop.item(pro).zip } | ${ realprop.item(pro).current_value } | ${ realprop.item(pro).amt_owed } | ${ realprop.item(pro).equity }
   % endfor  
-yesno: realprop.there_is_another
+fields:
+  - no label: realprop.there_is_another
+    datatype: yesnoradio
 ---
 id: foreclosure info
 question: |
@@ -245,7 +253,9 @@ question: |
 subquestion: |
   Please answer yes if you have any savings, checking, certificates of deposit, or 
   money market accounts. 
-yesno: hasbank
+fields:
+  - no label: hasbank
+    datatype: yesnoradio
 ---
 id: bank account info
 question: |
@@ -269,14 +279,18 @@ subquestion: |
   % for ba in bankact:
   ${ bankact.item(ba).bank_name } | ${ bankact.item(ba).act_number } | ${ bankact.item(ba).act_type } | ${ bankact.item(ba).balance } 
   % endfor  
-yesno: bankact.there_is_another
+fields:
+  - no label: bankact.there_is_another
+    datatype: yesnoradio
 ---
 id: retirement accounts
 question: |
   Do you have any retirement accounts?
 subquestion: |
   This includes any 401k's, IRA's, Roth IRA's, pensions, or Keogh accounts. 
-yesno: hasretirement
+fields:
+  - no label: hasretirement
+    datatype: yesnoradio
 
 ---
 id: retirement account info
@@ -301,12 +315,16 @@ subquestion: |
   % for ba in retirement_acts:
   ${ retirement_acts.item(ba).name } | ${ retirement_acts.item(ba).act_number } | ${ retirement_acts.item(ba).act_type } | ${ retirement_acts.item(ba).balance } 
   % endfor  
-yesno: retirement_acts.there_is_another
+fields:
+  - no label: retirement_acts.there_is_another
+    datatype: yesnoradio
 ---
 id: securities
 question: |
   Do you have any securities such as mutual funds, stocks, or shares in companies?
-yesno: hassecurities
+fields:
+  - no label: hassecurities
+    datatype: yesnoradio
  
 ---
 id: security info
@@ -331,7 +349,9 @@ subquestion: |
   % for se in securities:
   ${ securities.item(se).type } | ${ securities.item(se).issuer } | ${ securities.item(se).quant } | ${ securities.item(se).cur_val } 
   % endfor    
-yesno: securities.there_is_another
+fields:
+  - no label: securities.there_is_another
+    datatype: yesnoradio
 ---
 id: assets amounts
 question: |
@@ -410,7 +430,7 @@ id: anyone holding assets
 question: |
   Is anyone holding any assets for you on your behalf?
 fields: 
-  - no label: anyone_else_hold_assets
+  - "Is anyone holding any assets for you on your behalf?": anyone_else_hold_assets
     datatype: radio
     choices: 
       - Yes
@@ -433,7 +453,7 @@ id: party to lawsuit
 question: |
   Are you a party to a lawsuit now pending?
 fields: 
-  - no label: party_to_lawsuit
+  - "Are you a party to a lawsuit now pending?": party_to_lawsuit
     datatype: radio
     choices: 
       - Yes
@@ -456,7 +476,7 @@ id: insurance claim
 question: |
   Do you have any type of insurance claim pending?
 fields: 
-  - no label: any_insurance_claim
+  - "Do you have any type of insurance claim pending?": any_insurance_claim
     datatype: radio
     choices: 
       - Yes
@@ -479,7 +499,7 @@ id: inheritance likely
 question: |
   Is there any likelihood you will receive an inheritance in the next five years?
 fields: 
-  - no label: any_inheritance_likely
+  - "Is there any likelihood you will receive an inheritance in the next five years?": any_inheritance_likely
     datatype: radio
     choices: 
       - Yes
@@ -508,7 +528,7 @@ id: bankruptcy
 question: |
   Do you have a pending bankruptcy case in U.S. Bankruptcy Court?
 fields: 
-  - no label: bankruptcy_case_pending
+  - "Do you have a pending bankruptcy case in U.S. Bankruptcy Court?": bankruptcy_case_pending
     datatype: radio
     choices: 
       - Yes

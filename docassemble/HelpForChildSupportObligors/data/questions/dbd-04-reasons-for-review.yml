@@ -171,7 +171,7 @@ id: dbd 04 proof of guardianship
 question: |
   Did DOR take money from the bank account you use to keep this other person's money?
 fields:
-  - no label: dor_take_ward_account
+  - "Did DOR take money from the bank account you use to keep this other person's money?": dor_take_ward_account
     datatype: yesnoradio
   - Did the money DOR take belong to this other person?: dor_take_ward_money
     datatype: yesnoradio
@@ -276,7 +276,7 @@ question: |
 subquestion: |
   Did DOR take money from the **same account** your ${ your_past_benefits } benefits are deposited into?
 fields:
-  - no label: account_same
+  - "DOR is taking money from your bank account": account_same
     datatype: radio
     choices:
       - Yes: True
