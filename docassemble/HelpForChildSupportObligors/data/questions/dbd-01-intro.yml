@@ -203,7 +203,7 @@ question: |
 subquestion: |
   Check the box next to everything that is true.
 fields:
-  - no label: help_needed
+  - "What do you need help with, ${client.name.first}?": help_needed
     datatype: checkboxes
     choices:
       - DOR is wrong about the amount of child support I owe.: disagreement
@@ -296,4 +296,6 @@ subquestion: |
   
   Do you want to work on the Statement of Financial Condition?
   
-yesno: need_offer
+fields:
+  - no label: need_offer
+    datatype: yesnoradio

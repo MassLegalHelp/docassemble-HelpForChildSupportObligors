@@ -2,7 +2,7 @@ id: is client employed and employer info
 question: |
   Are you currently employed?
 fields: 
-  - no label: client_is_employed
+  - "Are you currently employed?": client_is_employed
     datatype: yesnoradio
   - Are you self-employed?: employer.self
     datatype: radio
@@ -90,7 +90,7 @@ if: |
 question: |
   Is your spouse employed?
 fields: 
-  - no label: is_spouse_employed
+  - "Is your spouse employed?": is_spouse_employed
     datatype: yesnoradio
   - Spouse's Employer: spouse_employer.name
     show if: 
@@ -136,7 +136,13 @@ question : |
   % endif
   ?
 fields: 
-  - no label: spouse_has_other_income_source 
+  - label: |
+      Does your spouse have a monthly income source 
+      % if is_spouse_employed == True:
+      other than employment with ${spouse_employer.name}
+      % endif
+      ?
+    field: spouse_has_other_income_source
     datatype: yesnoradio
   - What source?: spouse_monthly_income_source
     show if: 
@@ -184,4 +190,4 @@ code: |
       spouse_monthly_income = "N/A"
       spouse_monthly_income_source = "N/A"
 
-  section_iii_complete = True  
+  section_iii_complete = True

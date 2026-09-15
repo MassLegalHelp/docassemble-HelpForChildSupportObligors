@@ -266,7 +266,7 @@ if: |
 question: |
   How much did you receive as your last bonus?
 fields:
-  - no label: bonus_amt_base
+  - "How much did you receive as your last bonus?": bonus_amt_base
     datatype: currency
   - How frequently are your bonuses paid?: bonus_amt_freq
     choices: 
@@ -280,7 +280,7 @@ if: |
 question: |
   How much did you receive as your commission total?
 fields:
-  - no label: comm_amt_base
+  - "How much did you receive as your commission total?": comm_amt_base
     datatype: currency
   - How frequently are your commissions paid?: comm_amt_freq
     choices: 

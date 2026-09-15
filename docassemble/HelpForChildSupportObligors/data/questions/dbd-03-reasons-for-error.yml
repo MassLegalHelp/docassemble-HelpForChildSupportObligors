@@ -173,7 +173,7 @@ subquestion: |
   
   Is the date on any of these orders **after** ${cs_order_date}?
 fields:
-  - no label: order_modified
+  - "Has the court changed your child support order since ${cs_order_date}?": order_modified
     datatype: yesnoradio
   - How many times has the court changed your child support order since ${cs_order_date}?: order_modified_number 
     datatype: integer
@@ -209,7 +209,9 @@ validation code: |
 id: dbd 03 - DOR have a copy
 question: |
   Does DOR/CSE have a copy of the ${ most_recent_order} child support order?
-yesnomaybe: cse_copy
+fields:
+  - no label: cse_copy
+    datatype: yesnomaybe
 ---
 id: dbd 03 - end date
 question: |
@@ -245,7 +247,9 @@ subquestion: |
   You said your child support order says it ends, "${cs_order_end_explanation}.
   
   Has this happened?
-yesno: cs_order_description_happened
+fields:
+  - no label: cs_order_description_happened
+    datatype: yesnoradio
 ---
 id: dbd 03 - income gone down
 question: |

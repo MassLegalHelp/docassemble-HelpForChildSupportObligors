@@ -102,6 +102,7 @@ buttons:
   - "Sign on my device": True
   - "Print and sign by hand": False
 ---
+id: "sign your forms"
 question: |
   Sign your forms  
 signature: signature

@@ -9,7 +9,7 @@ id: client address rent or own
 question: |
   Do you rent or own ${ client.address.address }?
 fields: 
-  - no label: client.address.type
+  - "Do you rent or own ${ client.address.address }?": client.address.type
     datatype: radio
     choices: 
       - Rent
@@ -59,7 +59,7 @@ id: client marital status
 question: |
   What is your current marital status?
 fields: 
-  - no label: client.marital_status
+  - "What is your current marital status?": client.marital_status
     datatype: radio
     choices: 
       - Married

@@ -113,7 +113,7 @@ question: |
 subquestion: |
   Did you file anything at court to ask them to change the child support order?
 fields: 
-  - no label: filed_to_change
+  - "If you checked anything not listed...": filed_to_change
     datatype: radio
     choices:
       - Yes: True
@@ -215,7 +215,9 @@ code: |
 id: dbd 05 UI?
 question: |
   Did you get Unemployment Insurance?
-yesno: unemployment_insurance
+fields:
+  - no label: unemployment_insurance
+    datatype: yesnoradio
 ---
 id: dbd 05 modify for unemployment
 question: |
@@ -223,7 +225,7 @@ question: |
 subquestion: |
  Did you ask the court to change your child support order because you stopped working or lost your job?
 fields: 
-  - no label: unemploy_mod
+  - "Did you ask the court to change the child support order?": unemploy_mod
     datatype: yesnoradio
   - Why did you file in Court?: mod_unemploy_reason
     datatype: area
@@ -275,7 +277,7 @@ question: |
 subquestion: |
   While you were in prison or jail, did you file anything at court to ask them to change your child support order because you were in jail/prison?
 fields:
-  - no label: jail_mod
+  - "Did you ask the court to modify your child support order?": jail_mod
     datatype: yesnoradio
   - Why did you file in Court?: mod_jail_reason
     datatype: area
@@ -288,7 +290,9 @@ fields:
 id: dbd 05 child move in
 question: |
   Have any of the children that you pay child support for lived with you after the court ordered you to pay child support?
-yesno: child_lives_w_obligor
+fields:
+  - no label: child_lives_w_obligor
+    datatype: yesnoradio
 ---
 id: dbd 05 child live with you now
 question: |
@@ -296,7 +300,7 @@ question: |
 subquestion: |
    Do you have an order from the Court that says the ${ child_te } ${ verb_present('live', 'pl' if child_number > 1 else '3sg') } with you now?
 fields: 
-  - no label: child_with_obligor_order
+  - "My ${ child_te } ${ verb_present('live', 'pl' if child_number > 1 else '3sg') } with me now": child_with_obligor_order
     datatype: yesnoradio
   - Do you have any written proof that shows your  ${ child_te } moved in with you?: child_with_obligor_proof
     datatype: yesnoradio
@@ -316,7 +320,7 @@ id: dbd 05 reconcile
 question: |
   Did you get back together with ${other_parent.name.first}?
 fields:
-  - no label: reconcile
+  - "Did you get back together with ${other_parent.name.first}?": reconcile
     datatype: radio
     choices:
       - Yes: True
@@ -341,7 +345,7 @@ question: |
 subquestion: |
   When did you ${ reconciliation_action }?
 fields:
-  - no label: reconcile_date
+  - "Getting back together with ${other_parent.name.first}": reconcile_date
     datatype: date
     max: ${ today() }
   - Do you have a court order that ends child support?: reconcile_end_orderdate
