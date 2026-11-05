@@ -146,13 +146,8 @@ fields:
       val('disabled_still') === false
   - While you were disabled, did you ask the court to change the child support order?: disability_mod
     datatype: yesnoradio
-  - Why did you file in Court?: mod_dis_reason
+  - Why did you make that decision?: mod_dis_reason
     datatype: area
-    show if: disability_mod
-  - Why did you not file in Court?: mod_dis_reason
-    datatype: area
-    js show if: 
-      val('disability_mod') === false
 validation code: |
       if not disabled_still and disabled_end < disabled_start:
         validation_error("Your disability cannot have ended before it started")
