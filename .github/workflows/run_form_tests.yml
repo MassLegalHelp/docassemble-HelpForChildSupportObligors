@@ -2,75 +2,36 @@ name: Test the interview
 
 on:
   push:
+  pull_request:
   workflow_dispatch:
     inputs:
-      extra_languages:
-        description: 'Optional. A list of comma separated language names visible on buttons or links that change the language of the interview. Overrides the EXTRA_LANGUAGES repo secret.'
-        default: ''
       tags:
-        description: 'Optional. Use a "tag expression" specify which tagged tests to run (https://cucumber.io/docs/cucumber/api/#tag-expressions)'
+        description: 'Optional Cucumber tag expression, such as @smoke or @dont_owe_any'
+        required: false
         default: ''
+        type: string
+
+permissions:
+  contents: read
 
 jobs:
-
-  puppeteer-tests:
+  alkiln-tests:
+    name: Run ALKiln tests
+    # Same-repository PRs are already tested by push.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [20.x]
-
-    env:
-      BASE_URL: ${{ secrets.SERVER_URL }}
-      PLAYGROUND_EMAIL: ${{ secrets.PLAYGROUND_EMAIL }}
-      PLAYGROUND_PASSWORD: ${{ secrets.PLAYGROUND_PASSWORD }}
-      PLAYGROUND_ID: ${{ secrets.PLAYGROUND_ID }}
-      BRANCH_PATH: ${{ github.ref }}
-      EXTRA_LANGUAGES: ${{ secrets.EXTRA_LANGUAGES }}
-
-    name: Run Puppeteer tests
     steps:
-      - name: Set languages
-        run: echo "EXTRA_LANGUAGES=${{ github.event.inputs.extra_languages }}" >> $GITHUB_ENV
-        if: ${{ github.event.inputs.extra_languages != '' }}
-      - run: echo "REPO_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" >> $GITHUB_ENV
-      - run: echo "Repo address is $REPO_URL"
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup environment
-        uses: actions/setup-node@v4
+      - name: Start the temporary docassemble server
+        id: server
+        uses: SuffolkLITLab/ALKiln/action_for_github_server@v5
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm run setup
-      - run: npm run test -- ${{ github.event.inputs.tags && format('"--tags" "{0}"', github.event.inputs.tags) }}
-      - name: upload error artifacts
-        uses: actions/upload-artifact@v3
-        if: ${{ failure() }}
+          # ALKiln 5.17.2 expects the pre-1.10 checkbox and signature widgets.
+          DOCASSEMBLE_IMAGE: jhpyle/docassemble:1.9.13
+      - name: Run ALKiln
+        uses: SuffolkLITLab/ALKiln@v5
         with:
-          name: errors
-          path: ./**/error*.jpg
-      - name: upload screenshot steps
-        uses: actions/upload-artifact@v3
-        # They will upload even if a previosu step has failed
-        if: ${{ always() }}
-        with:
-          name: screenshots
-          path: ./**/screenshot*.jpg
-      - name: upload downloads
-        uses: actions/upload-artifact@v3
-        # They will upload even if a previous step has failed
-        if: ${{ always() }}
-        with:
-          name: downloads
-          path: ./**/downloads_*
-      - name: upload report
-        uses: actions/upload-artifact@v3
-        # They will upload even if a previous step has failed
-        if: ${{ always() }}
-        with:
-          name: report
-          path: ./**/*_report_*
-      - name: Cleanup
-        if: ${{ always() }}
-        run: npm run takedown
+          SERVER_URL: ${{ steps.server.outputs.SERVER_URL }}
+          DOCASSEMBLE_DEVELOPER_API_KEY: ${{ steps.server.outputs.DOCASSEMBLE_DEVELOPER_API_KEY }}
+          INSTALL_METHOD: server
+          ALKILN_VERSION: 5.17.2
+          ALKILN_TAG_EXPRESSION: ${{ inputs.tags }}

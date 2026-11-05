@@ -1,11 +1,9 @@
-tests/chromedriver
 *DS_Store*
 node_modules*
 .env
 npm-debug.log
-error*.jpg
-screenshot_*.jpg
-downloads_*
-*_lang_*.feature
-*_report_*
-_al_test_project_name*
+alkiln-*
+_artifacts_path.json
+cucumber-report.txt
+**/data/sources/_alkiln_generated/
+runtime_config.json

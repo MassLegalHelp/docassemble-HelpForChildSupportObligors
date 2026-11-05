@@ -67,7 +67,9 @@ id: other household members
 question: |
   Do any other people live in your house besides yourself
   and the children you already mentioned?
-yesno: hasindividual
+fields:
+  - no label: hasindividual
+    datatype: yesnoradio
 ---
 code: |
   if hasindividual == True:
@@ -108,7 +110,9 @@ subquestion: |
   % endif
   % endfor  
   
-yesno: ind_household.there_is_another
+fields:
+  - no label: ind_household.there_is_another
+    datatype: yesnoradio
 ---
 code: |
   nav.set_section('Household Information')
