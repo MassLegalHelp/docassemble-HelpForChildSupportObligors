@@ -6,6 +6,8 @@ code: |
   welcome
   important
   requirements
+  # Gather these before the help screen builds choices from them.
+  problems
   if help_needed.any_true('cantafford', 'cantsustain'):
     hardships  
   if problems.any_true('told-me-garnish-increase', 'told-boss-garnish-increase'): 
