@@ -24,10 +24,14 @@ jobs:
       - name: Start the temporary docassemble server
         id: server
         uses: SuffolkLITLab/ALKiln/action_for_github_server@v5
+        with:
+          # ALKiln 5.17.2 expects the pre-1.10 checkbox and signature widgets.
+          DOCASSEMBLE_IMAGE: jhpyle/docassemble:1.9.13
       - name: Run ALKiln
         uses: SuffolkLITLab/ALKiln@v5
         with:
           SERVER_URL: ${{ steps.server.outputs.SERVER_URL }}
           DOCASSEMBLE_DEVELOPER_API_KEY: ${{ steps.server.outputs.DOCASSEMBLE_DEVELOPER_API_KEY }}
           INSTALL_METHOD: server
+          ALKILN_VERSION: 5.17.2
           ALKILN_TAG_EXPRESSION: ${{ inputs.tags }}
